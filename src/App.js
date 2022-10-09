@@ -1,4 +1,5 @@
 import React from "react";
+import './categories.styles.scss';
 
 export const App = () => {
   const showpNow = "Shop Now";
