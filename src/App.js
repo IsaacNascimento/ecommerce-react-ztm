@@ -1,11 +1,16 @@
 import React from "react";
-import "./categories.styles.scss";
-import { Directory } from "./components/directory/directory.component";
+import { Routes, Route } from "react-router-dom";
+
+import { HomeComponent } from "./routes/home/HomeComponent";
+import { NavigationBar } from "./routes/navigation/NavigationBarComponent";
 
 export const App = () => {
   return (
-    <div className="categories-container">
-      <Directory />
-    </div>
+    <Routes>
+      <Route path="/" element={<NavigationBar />}>
+        <Route index element={<HomeComponent />} />
+        <Route path="/shop" element={<p>Shop Component</p>} />
+      </Route>
+    </Routes>
   );
 };
