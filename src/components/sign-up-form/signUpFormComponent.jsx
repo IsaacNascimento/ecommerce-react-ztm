@@ -14,10 +14,10 @@ export const SignUp = () => {
   // console.log(formFields);
 
   const handleChange = (event) => {
-    console.log(event.target);
+    // console.log(event.target);
     const { name, value } = event.target;
-    console.log(name);
-    console.log(value);
+    // console.log(name);
+    // console.log(value);
     setFormFields({...formFields, [name]: value});
   };
 
