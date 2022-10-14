@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebaseUtil";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebaseUtil";
+
+import { FormInput } from "../form-input/formInputComponent";
 
 const defaultFormFields = {
   displayName: "",
@@ -12,32 +17,33 @@ export const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
-    } else {
-      const fields = event.nativeEvent.srcElement;
-      const fieldsLenght = event.nativeEvent.srcElement.length;
-      const fieldsValues = [];
-      for (let i = 0; i < fieldsLenght; i++) {
-        fieldsValues.push(fields[i].value);
-      }
-
-      const data = {
-        email: fieldsValues[1],
-        password: fieldsValues[3],
-      };
-
-      const value = { ...data };
-      if (!value.password || !value.email) return;
-      return await createUser(value.email, value.password);
+      return;
     }
-  };
 
-  const createUser = async (email, password) => {
-    return await createAuthUserWithEmailAndPassword(email, password);
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(user);
+
+      await createUserDocumentFromAuth(user, { displayName });
+      resetFormFields();
+    } catch (error) {
+      if (error.code) {
+        alert("Cannot create, email already in use");
+      }
+      console.log("User Creation encountered an error ", error);
+    }
   };
 
   const handleChange = (event) => {
@@ -49,8 +55,8 @@ export const SignUp = () => {
     <div>
       <h1>Sign up with your email and password</h1>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="Display Name"
           type="text"
           required
           onChange={(e) => handleChange(e)}
@@ -58,8 +64,8 @@ export const SignUp = () => {
           value={displayName}
         />
 
-        <label>Email</label>
-        <input
+        <FormInput
+          label="Email"
           type="email"
           required
           onChange={handleChange}
@@ -67,8 +73,8 @@ export const SignUp = () => {
           value={email}
         />
 
-        <label>Password</label>
-        <input
+        <FormInput
+          label="Password"
           type="password"
           required
           onChange={handleChange}
@@ -76,8 +82,8 @@ export const SignUp = () => {
           value={password}
         />
 
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="Confirm Password"
           type="password"
           required
           onChange={handleChange}
