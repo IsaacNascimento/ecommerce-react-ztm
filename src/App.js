@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { HomeComponent } from "./routes/home/HomeComponent";
 import { NavigationBar } from "./routes/navigation/NavigationBarComponent";
-import { SignIn } from "./routes/sign-in/SignInComponent";
+import { SignIn } from "./routes/sign-in-form/SignInComponent";
 
 export const App = () => {
   return (
