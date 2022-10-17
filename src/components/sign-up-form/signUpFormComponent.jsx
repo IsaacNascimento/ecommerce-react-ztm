@@ -17,6 +17,31 @@ export const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  const inputMap = [
+    {
+      uid: "1",
+      name: "displayName",
+      label: "Display Name",
+      type: "text",
+      value: displayName,
+    },
+    { uid: "2", name: "email", label: "Email", type: "email", value: email },
+    {
+      uid: "3",
+      name: "password",
+      label: "Password",
+      type: "password",
+      value: password,
+    },
+    {
+      uid: "4",
+      name: "confirmPassword",
+      label: "Confirm Password",
+      type: "password",
+      value: confirmPassword,
+    },
+  ];
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -55,42 +80,17 @@ export const SignUp = () => {
     <div>
       <h1>Sign up with your email and password</h1>
       <form onSubmit={handleSubmit}>
-        <FormInput
-          label="Display Name"
-          type="text"
-          required
-          onChange={(e) => handleChange(e)}
-          name="displayName"
-          value={displayName}
-        />
-
-        <FormInput
-          label="Email"
-          type="email"
-          required
-          onChange={handleChange}
-          name="email"
-          value={email}
-        />
-
-        <FormInput
-          label="Password"
-          type="password"
-          required
-          onChange={handleChange}
-          name="password"
-          value={password}
-        />
-
-        <FormInput
-          label="Confirm Password"
-          type="password"
-          required
-          onChange={handleChange}
-          name="confirmPassword"
-          value={confirmPassword}
-        />
-
+        {inputMap.map((item) => (
+          <FormInput
+            key={item.uid}
+            name={item.name}
+            label={item.label}
+            type={item.type}
+            value={item.value}
+            required
+            onChange={handleChange}
+          />
+        ))}
         <button type="submit">Sign Up</button>
       </form>
     </div>
