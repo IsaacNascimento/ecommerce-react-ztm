@@ -3,8 +3,11 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebaseUtil";
+import { Button } from "../button/button-component";
 
 import { FormInput } from "../form-input/formInputComponent";
+
+import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
   displayName: "",
@@ -92,7 +95,7 @@ export const SignUp = () => {
             onChange={handleChange}
           />
         ))}
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
