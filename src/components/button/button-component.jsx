@@ -6,10 +6,20 @@ const BUTTON_TYPE_CLASSES = {
   inverted: "inverted",
 };
 
-export const Button = ({ children, buttonType, ...otherProps }) => {
-  console.log(buttonType);
+export const Button = ({
+  children,
+  buttonType,
+  onClick,
+  type,
+  ...otherProps
+}) => {
+  // console.log(otherProps);
   return (
-    <button className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}>
+    <button
+      type={type || "button"}
+      className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
