@@ -2,7 +2,6 @@ import "./categoryItem.styles.scss";
 import React from "react";
 
 export const CategoryItem = ({ category }) => {
-  console.log(category);
   const showpNow = "Shop Now";
   return (
     <div className="category-container">
