@@ -9,7 +9,6 @@ import "./cart-icon.styles.scss";
 export const CartIcon = () => {
   const { setIsCartOpen, cartItems } = useContext(CartContext);
   const [count, setCount] = useState(0);
-  console.log(cartItems);
 
   const totalCount = cartItems.reduce(
     (acumulator, current) => acumulator + current?.quantity,
